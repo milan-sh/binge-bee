@@ -6,7 +6,7 @@ const VideoCard = () => {
         alt="Video Thumbnail"
         className="w-full md:w-fit h-auto object-contain rounded-lg shadow-lg hover:scale-95 transition"
       />
-      <div className="absolute text-sm top-48 md:top-40 right-2 bg-black/20 font-semibold text-white p-1 rounded-md shadow-md">
+      <div className="absolute text-sm top-44 md:top-40 right-2 bg-black/20 font-semibold text-white p-1 rounded-md shadow-md">
         <p>42:13</p>
       </div>
       <div className="flex gap-x-4 pt-4">
@@ -16,10 +16,10 @@ const VideoCard = () => {
           className="h-10 w-fit rounded-full"
         />
         <div className="flex flex-col gap-y-2">
-          <h3 className="font-semibold leading-5 text-lg">
+          <h3 className="font-semibold leading-5 text-sm md:text-lg">
             How to use Clerk in Next.js 15 - Step by Step Guide 🔥
           </h3>
-          <div className="w-full gap-x-3 gap-y-1 flex md:flex-col flex-row">
+          <div className="w-full gap-x-3 gap-y-1 flex md:flex-col flex-row text-sm md:text-base">
             <p className="text-gray-400 w-fit leading-4">codewithharry</p>
             <p className="text-gray-400 w-fit flex items-center gap-x-2 leading-4">
               1.9M views{" "}
