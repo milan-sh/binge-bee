@@ -8,7 +8,7 @@ import { Menu } from 'lucide-react';
 const Header = () => {
   const {toggleSidebar} = useSidebar()
   return (
-    <nav className="p-4 sticky top-0 flex justify-between items-center">
+    <nav className="p-4 sticky top-0 flex justify-between items-center z-20 backdrop-blur-md rounded-md">
       <div className="flex items-center gap-1">
         <button className="cursor-pointer" onClick={toggleSidebar}>
         <Menu color="white" size="28"/>
