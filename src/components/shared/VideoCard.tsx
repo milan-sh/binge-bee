@@ -22,8 +22,7 @@ const VideoCard = () => {
           <div className="w-full gap-x-3 gap-y-1 flex md:flex-col flex-row text-sm md:text-base">
             <p className="text-gray-400 w-fit leading-4">codewithharry</p>
             <p className="text-gray-400 w-fit flex items-center gap-x-2 leading-4">
-              1.9M views{" "}
-              <div className="inline-block h-1 w-1 bg-gray-500 rounded-full"></div>{" "}
+              1.9M views 
               2 weeks ago
             </p>
           </div>
