@@ -1,6 +1,24 @@
 import useFetch from "@/hooks/use-Fetch";
 import { VideoCard, VideoSkeleton } from "../components/index";
 
+
+interface Owner {
+  _id: string
+  avatar:string
+  username: string
+}
+
+interface Video{
+  _id:string,
+  thumbnail: string
+  duration: number | string
+  title: string,
+  views: number
+  createdAt: string | Date
+  owner: Owner
+}
+
+
 const Home = () => {
   const { data, loading, error } = useFetch("/api/v1/video/videos");
   const sekeltonCount = 8;
@@ -21,7 +39,7 @@ const Home = () => {
       )}
       {!loading &&
         data &&
-        data?.data?.map((video) => (
+        data?.data?.map((video:Video) => (
           <VideoCard
             key={video?._id}
             thumbnail={video?.thumbnail}
