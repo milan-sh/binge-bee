@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router";
-import {api} from "../api/api.js";
+import { api } from "@/api/api";
 
 interface IFormInput {
   email: string;

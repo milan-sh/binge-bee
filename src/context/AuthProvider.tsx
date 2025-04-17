@@ -1,8 +1,8 @@
 // context/AuthProvider.jsx
 import { createContext, useState, useEffect, useContext, useLayoutEffect, ReactNode } from 'react';
-import {api} from "@/api/api.js"
+import { api } from '@/api/api';
 import axios from 'axios';
-import { AxiosResponse } from 'axios';
+import { AxiosResponse, AxiosError } from 'axios';
 import { useNavigate } from 'react-router';
 
 interface User {
@@ -64,10 +64,11 @@ export const AuthProvider = ({ children }:AuthPorviderProps) => {
           setIsAuthenticated(false);
           setUser(null);
         }
-      } catch (error) {
+      } catch (error: unknown) {
+        const err = error as AxiosError<{message:string}>
         setIsAuthenticated(false);
         setUser(null);
-        console.error("Authentication check failed:", error.response?.data?.message || error.message);
+        console.error("Authentication check failed:", err.response?.data?.message || err.message);
       } finally {
         setLoading(false);
       }
@@ -114,8 +115,9 @@ export const AuthProvider = ({ children }:AuthPorviderProps) => {
               redirectToLogin()
               
             }
-          } catch (refreshError) {
-            console.error("Token refresh failed:", refreshError.response?.data?.message || refreshError.message);
+          } catch (refreshError: unknown) {
+            const err = refreshError as AxiosError<{message:string}>
+            console.error("Token refresh failed:", err.response?.data?.message || err.message);
             setIsAuthenticated(false);
             setUser(null);
             redirectToLogin()
@@ -140,8 +142,9 @@ export const AuthProvider = ({ children }:AuthPorviderProps) => {
         return true; // Indicate successful login
       }
       return false;
-    } catch (error) {
-      console.error("Login failed:", error.response?.data?.message || error.message);
+    } catch (error: unknown) {
+      const err = error as AxiosError<{message:string}>
+      console.error("Login failed:", err.response?.data?.message || err.message);
       return false; // Indicate failed login
     }
   };
@@ -150,8 +153,9 @@ export const AuthProvider = ({ children }:AuthPorviderProps) => {
     try {
       // Optional: Call a backend logout endpoint to clear session on the server
       await api.post('/api/users/logout');
-    } catch (error) {
-      console.error("Logout error:", error.response?.data?.message || error.message);
+    } catch (error:unknown) {
+      const err = error as AxiosError<{message:string}>
+      console.error("Logout error:", err.response?.data?.message || err.message);
     } finally {
       setIsAuthenticated(false);
       setUser(null);
