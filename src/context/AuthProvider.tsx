@@ -152,7 +152,7 @@ export const AuthProvider = ({ children }:AuthPorviderProps) => {
   const logout = async ():Promise<void> => {
     try {
       // Optional: Call a backend logout endpoint to clear session on the server
-      await api.post('/api/users/logout');
+      await api.post('/api/v1/users/logout');
     } catch (error:unknown) {
       const err = error as AxiosError<{message:string}>
       console.error("Logout error:", err.response?.data?.message || err.message);

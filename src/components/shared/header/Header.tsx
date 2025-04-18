@@ -24,9 +24,13 @@ const Header = () => {
 
   const handleLogout = async(e: React.MouseEvent<HTMLButtonElement>)=>{
     e.preventDefault();
-    const logoutSuccess : unknown = await logout();
-    if(logoutSuccess){
-      navigate("/login")
+    try {
+      const logoutSuccess : unknown = await logout();
+      if(logoutSuccess){
+        navigate("/login")
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
