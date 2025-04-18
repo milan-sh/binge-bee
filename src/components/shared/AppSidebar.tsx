@@ -4,6 +4,9 @@ import {
   TvMinimalPlay,
   History,
   Settings,
+  ListVideo,
+  ThumbsUp,
+  Twitter,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useSidebar } from "@/components/ui/sidebar";
@@ -21,6 +24,34 @@ import { UseAuth } from "@/context/AuthProvider";
 export function AppSidebar() {
   const { open } = useSidebar();
   const { user } = UseAuth();
+
+  const loggedInUserNav = [
+    {
+      id: 1,
+      icon: History,
+      title: "History",
+      link: "/history",
+    },
+    {
+      id: 2,
+      icon: ListVideo,
+      title: "Playlists",
+      link: "/playlists",
+    },
+    {
+      id: 3,
+      icon: ThumbsUp,
+      title: "Liked videos",
+      link: "/liked-videos",
+    },
+    {
+      id: 4,
+      icon: Twitter,
+      title: "Tweets",
+      link: "/tweets",
+    },
+  ];
+
   return (
     <Sidebar
       collapsible="icon"
@@ -68,40 +99,46 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Group 2: You & History */}
-        <SidebarGroup>
+        {/* Group 2: You, History, Playlists, Liked Videos & Twet */}
+        <SidebarGroup className={`py-2 ${user? "border-b" : ""} border-gray-800`}>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild className="my-1">
-                  <NavLink
-                    to="/you"
-                    className={({ isActive }) =>
-                      isActive ? "text-white font-medium" : ""
-                    }
-                  >
-                    <span>
-                      <CircleUserRound />
-                    </span>
-                    <span className="md:text-lg font-normal ml-3">You</span>
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild className="my-1">
-                  <NavLink
-                    to="/history"
-                    className={({ isActive }) =>
-                      isActive ? "text-white font-medium" : ""
-                    }
-                  >
-                    <span>
-                      <History />
-                    </span>
-                    <span className="md:text-lg font-normal ml-3">History</span>
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              {!user && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild className="my-1">
+                    <NavLink
+                      to="/you"
+                      className={({ isActive }) =>
+                        isActive ? "text-white font-medium" : ""
+                      }
+                    >
+                      <span>
+                        <CircleUserRound />
+                      </span>
+                      <span className="md:text-lg font-normal ml-3">You</span>
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
+              {user && loggedInUserNav.map((menu) => (
+                <SidebarMenuItem key={menu.id}> 
+                  <SidebarMenuButton asChild className="my-1">
+                    <NavLink
+                      to={menu.link}
+                      className={({ isActive }) =>
+                        isActive ? "text-white font-medium" : ""
+                      }
+                    >
+                      <span>
+                        <menu.icon />
+                      </span>
+                      <span className="md:text-lg font-normal ml-3">
+                        {menu.title}
+                      </span>
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
