@@ -20,19 +20,19 @@ import React from "react";
 const Header = () => {
   const { toggleSidebar } = useSidebar();
   const { user, logout } = UseAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleLogout = async(e: React.MouseEvent<HTMLButtonElement>)=>{
+  const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const logoutSuccess : unknown = await logout();
-      if(logoutSuccess){
-        navigate("/login")
+      const logoutSuccess: unknown = await logout();
+      if (logoutSuccess) {
+        navigate("/login");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <nav className="p-4 sticky top-0 flex justify-between items-center z-20 backdrop-blur-md rounded-md">
@@ -58,10 +58,12 @@ const Header = () => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <User />
-                <span>Profile</span>
-              </DropdownMenuItem>
+              <Link to={`/c/${user.username}`}>
+                <DropdownMenuItem>
+                  <User />
+                  <span>Your channel</span>
+                </DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>
                 <LayoutDashboard />
                 <span>Dashbaord</span>

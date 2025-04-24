@@ -43,6 +43,7 @@ const Signup = () => {
       if(data.coverImage && data.coverImage[0]){
         formData.append("converImage", data.coverImage[0])
       }
+      console.log(formData)
 
       const response = await api.post("/api/v1/users/register", formData, {headers: {
         "Content-Type": "multipart/form-data", // Important for sending files

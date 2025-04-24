@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { Home, Login, Signup, Subscriptions } from "./pages/index.ts";
+import { Home, Login, Signup, Subscriptions, Profile } from "./pages/index.ts";
 import { AuthProvider } from "./context/AuthProvider.tsx";
 import { ProtectedRoutes } from "./components/index.ts";
 
@@ -33,9 +33,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/subscriptions",
-        element: <ProtectedRoutes>
+        element: (<ProtectedRoutes>
           <Subscriptions/>
-        </ProtectedRoutes>
+        </ProtectedRoutes>)
+      },
+      {
+        path:"c/:username",
+        element:(
+          <ProtectedRoutes>
+            <Profile/>
+          </ProtectedRoutes>
+        )
       }
     ],
   },
