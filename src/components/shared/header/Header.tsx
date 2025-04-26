@@ -61,7 +61,7 @@ const Header = () => {
               <Link to={`/c/${user.username}`}>
                 <DropdownMenuItem>
                   <User />
-                  <span>Your channel</span>
+                  <span>View your channel</span>
                 </DropdownMenuItem>
               </Link>
               <DropdownMenuItem>
