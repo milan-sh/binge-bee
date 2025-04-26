@@ -29,7 +29,6 @@ const Signup = () => {
     try {
       setLoading(true);
       setErrorMessage("");
-
       const formData = new FormData() //create a new formData object
       formData.append("email", data.email)
       formData.append("fullName", data.fullName)
@@ -41,9 +40,8 @@ const Signup = () => {
       }
 
       if(data.coverImage && data.coverImage[0]){
-        formData.append("converImage", data.coverImage[0])
+        formData.append("coverImage", data.coverImage[0])
       }
-      console.log(formData)
 
       const response = await api.post("/api/v1/users/register", formData, {headers: {
         "Content-Type": "multipart/form-data", // Important for sending files
