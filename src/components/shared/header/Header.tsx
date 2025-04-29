@@ -101,10 +101,12 @@ const Header = () => {
                     <span>View your channel</span>
                   </DropdownMenuItem>
                 </Link>
-                <DropdownMenuItem>
-                  <LayoutDashboard />
-                  <span>Dashbaord</span>
-                </DropdownMenuItem>
+                <Link to={`/dashboard/${user._id}`}>
+                  <DropdownMenuItem>
+                    <LayoutDashboard />
+                    <span>Dashbaord</span>
+                  </DropdownMenuItem>
+                </Link>
                 <button onClick={handleLogout} className="w-full">
                   <DropdownMenuItem>
                     <Power />

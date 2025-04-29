@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { Home, Login, Signup, Subscriptions, Profile } from "./pages/index.ts";
+import { Home, Login, Signup, Subscriptions, Profile, Dashboard } from "./pages/index.ts";
 import { AuthProvider } from "./context/AuthProvider.tsx";
 import { ProtectedRoutes } from "./components/index.ts";
 
@@ -42,6 +42,14 @@ const router = createBrowserRouter([
         element:(
           <ProtectedRoutes>
             <Profile/>
+          </ProtectedRoutes>
+        )
+      },
+      {
+        path:"dashboard/:userId",
+        element:(
+          <ProtectedRoutes>
+            <Dashboard/>
           </ProtectedRoutes>
         )
       }
