@@ -1,6 +1,15 @@
 import { Button } from "@/components/ui/button";
 import Logo from "./Logo";
-import { CircleUserRound, LayoutDashboard, User, Power, Search} from "lucide-react";
+import {
+  CircleUserRound,
+  LayoutDashboard,
+  User,
+  Power,
+  Search,
+  Plus,
+  SquarePlay,
+  Twitter,
+} from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { Menu } from "lucide-react";
 import { UseAuth } from "@/context/AuthProvider";
@@ -42,47 +51,70 @@ const Header = () => {
         </button>
         <Logo />
       </div>
-      <div className="md:w-[40%] w-[50%] border-[1px] border-gray-700 rounded-full flex items-center">
-        <input type="text" placeholder="Search" className="outline-none md:w-[90%] w-[80%] rounded-full text-white py-2 px-6"/>
+      <div className="hidden md:w-[40%] w-[50%] border-[1px] border-gray-700 rounded-full md:flex items-center">
+        <input
+          type="text"
+          placeholder="Search"
+          className="outline-none md:w-[90%] w-[80%] rounded-full text-white py-2 px-6"
+        />
         <div className="h-10 flex items-center justify-center md:w-[10%] w-[20%] bg-gray-700 rounded-r-full">
-        <Search color="gray" size={25} className="cursor-pointer"/>
+          <Search color="gray" size={25} className="cursor-pointer" />
         </div>
       </div>
       {user ? (
-        <DropdownMenu>
-          <DropdownMenuTrigger className="border-none outline-none">
-            <Avatar className="mr-4 size-9">
-              <AvatarImage
-                className="object-cover object-top cursor-pointer"
-                src={user?.avatar}
-                alt={user?.fullName}
-              />
-              <AvatarFallback>{user?.fullName[0]}</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-20 md:w-56 bg-black text-white border border-primary md:-mt-10 mr-7 md:mr-20 shadow-2xl">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <Link to={`/c/${user.username}`}>
-                <DropdownMenuItem>
-                  <User />
-                  <span>View your channel</span>
-                </DropdownMenuItem>
-              </Link>
-              <DropdownMenuItem>
-                <LayoutDashboard />
-                <span>Dashbaord</span>
-              </DropdownMenuItem>
-              <button onClick={handleLogout} className="w-full">
-                <DropdownMenuItem>
-                  <Power />
-                  <span>Logout</span>
-                </DropdownMenuItem>
+        <div className="flex items-center justify-between gap-x-8">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="outline-none w-fit">
+              <button className="text-white bg-gray-800 px-4 py-1.5 rounded-full flex justify-between items-center text-lg gap-2 cursor-pointer">
+                <Plus /> Create
               </button>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-20 md:w-44 bg-black text-white text-xl font-medium border border-primary">
+              <DropdownMenuItem>
+                <SquarePlay size={20} />
+                <span>Upload Video</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Twitter />
+                <span>Post a tweet</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="outline-none w-fit">
+              <Avatar className="mr-4 size-9">
+                <AvatarImage
+                  className="object-cover object-top cursor-pointer"
+                  src={user?.avatar}
+                  alt={user?.fullName}
+                />
+                <AvatarFallback>{user?.fullName[0]}</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-20 md:w-56 bg-black text-white border border-primary md:-mt-10 mr-7 md:mr-20 shadow-2xl">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <Link to={`/c/${user.username}`}>
+                  <DropdownMenuItem>
+                    <User />
+                    <span>View your channel</span>
+                  </DropdownMenuItem>
+                </Link>
+                <DropdownMenuItem>
+                  <LayoutDashboard />
+                  <span>Dashbaord</span>
+                </DropdownMenuItem>
+                <button onClick={handleLogout} className="w-full">
+                  <DropdownMenuItem>
+                    <Power />
+                    <span>Logout</span>
+                  </DropdownMenuItem>
+                </button>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       ) : (
         <Link to="/login">
           <Button variant="login">
