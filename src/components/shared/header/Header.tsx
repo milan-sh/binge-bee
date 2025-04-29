@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Logo from "./Logo";
-import { CircleUserRound, LayoutDashboard, User, Power } from "lucide-react";
+import { CircleUserRound, LayoutDashboard, User, Power, Search} from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { Menu } from "lucide-react";
 import { UseAuth } from "@/context/AuthProvider";
@@ -35,12 +35,18 @@ const Header = () => {
   };
 
   return (
-    <nav className="p-4 sticky top-0 flex justify-between items-center z-20 backdrop-blur-md rounded-md">
+    <nav className="p-4 sticky top-0 flex justify-between items-center z-20 backdrop-blur-3xl shadow-xl rounded-md gap-x-2">
       <div className="flex items-center gap-1">
         <button className="cursor-pointer" onClick={toggleSidebar}>
           <Menu color="white" size="28" />
         </button>
         <Logo />
+      </div>
+      <div className="md:w-[40%] w-[50%] border-[1px] border-gray-700 rounded-full flex items-center">
+        <input type="text" placeholder="Search" className="outline-none md:w-[90%] w-[80%] rounded-full text-white py-2 px-6"/>
+        <div className="h-10 flex items-center justify-center md:w-[10%] w-[20%] bg-gray-700 rounded-r-full">
+        <Search color="gray" size={25} className="cursor-pointer"/>
+        </div>
       </div>
       {user ? (
         <DropdownMenu>

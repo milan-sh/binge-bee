@@ -24,7 +24,7 @@ const Home = () => {
   const sekeltonCount = 8;
 
   return (
-    <div className="text-white flex gap-6 flex-wrap justify-start">
+    <div className="text-white flex gap-6 flex-wrap justify-start py-6">
       {data?.data?.length < 0 && (
         <p className="text-lg mx-auto absolute top-[50%] left-[50%] -translate-x-[30%] -translate-y-[50%] text-gray-400">
           No videos found
