@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
 interface ApiError {
@@ -13,45 +13,46 @@ function useFetch<T = any>(url: string) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ApiError | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get<T>(url);
-        setData(res.data);
-      } catch (err) {
-        //handle Axios Error
-        if(axios.isAxiosError(err)){
-          setError({
-            code: err?.code || "AXIOS ERROR",
-            message: err.message,
-            status: err?.response?.status,
-            details: err.response?.data
-          })
-        } 
-        //handle generic error
-        else if(err instanceof Error){
-          setError({
-            code: "Unknown Error",
-            message: err.message
-          })
-        }
-        //fallback for not throw errors
-        else{
-          setError({
-            code:"Unknown Error",
-            message: String(err)
-          })
-        }
-      } finally {
-        setLoading(false);
+  const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get<T>(url);
+      setData(res.data);
+      setError(null);
+    } catch (err) {
+      //handle Axios Error
+      if(axios.isAxiosError(err)){
+        setError({
+          code: err?.code || "AXIOS ERROR",
+          message: err.message,
+          status: err?.response?.status,
+          details: err.response?.data
+        })
+      } 
+      //handle generic error
+      else if(err instanceof Error){
+        setError({
+          code: "Unknown Error",
+          message: err.message
+        })
       }
-    };
-
-    fetchData();
+      //fallback for not throw errors
+      else{
+        setError({
+          code:"Unknown Error",
+          message: String(err)
+        })
+      }
+    } finally {
+      setLoading(false);
+    }
   }, [url]);
 
-  return { data, loading, error };
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, loading, error, refetch: fetchData };
 }
 
 export default useFetch;
