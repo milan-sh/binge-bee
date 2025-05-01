@@ -12,7 +12,7 @@ interface TweetPropType{
 const TweetCard = ({content, owner}:TweetPropType) => {
     console.log(owner)
   return (
-    <div className="md:w-80 border border-gray-800 p-2 rounded-lg">
+    <div className="md:w-80 md:min-h-auto min-h-50 border border-gray-800 p-2 rounded-lg">
         <div className="flex items-center justify-between">
             <div className="flex gap-x-2">
                 <img src={owner?.avatar} alt={owner?.username} className="w-12 h-12 object-cover rounded-full" />
@@ -23,7 +23,7 @@ const TweetCard = ({content, owner}:TweetPropType) => {
             </div>
             <Twitter />
         </div>
-        <p className="mt-1 min-h-10">{content}</p>
+        <p className="mt-4 min-h-10">{content}</p>
         <div className="flex items-center justify-evenly mt-4 bg-gray-900 p-2 rounded-sm">
         <Heart />
         <Forward />

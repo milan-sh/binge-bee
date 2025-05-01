@@ -149,7 +149,7 @@ const Profile = () => {
         <TabsContent value="tweet">
           {tweetsLoading ? <p>Loading...</p> :
           tweetsError ? <p>No Tweets Found.</p>:
-          <div className="">
+          <div className="grid  gap-6">
             {tweets && tweets?.data?.map((tweetItem:TweetType)=>(
               <TweetCard
               key={tweetItem?._id}
